@@ -12,11 +12,13 @@
     tools:context="com.tekmob.mapx.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_gravity="center_horizontal"
+        android:id="@+id/imageView2"
         android:src="@drawable/mapx"
-        android:contentDescription="title" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" />
 </RelativeLayout>

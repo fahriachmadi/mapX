@@ -1,2 +1,0 @@
-# mapX
-Tugas Tekmob
