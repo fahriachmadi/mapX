@@ -3,21 +3,21 @@ package com.tekmob.mapx.domain;
 /**
  * Created by Conqueror on 10/29/2017.
  */
-public class Map {
+public class Maps {
     private int id;
     private String koordinatX;
     private String koordinatY;
     private String nama;
 
-    public Map(){}
+    public Maps(){}
 
-    public Map(String koordinatX, String koordinatY, String nama) {
+    public Maps(String koordinatX, String koordinatY, String nama) {
         this.koordinatX = koordinatX;
         this.koordinatY = koordinatY;
         this.nama = nama;
     }
 
-    public Map(int id, String koordinatX, String koordinatY, String nama) {
+    public Maps(int id, String koordinatX, String koordinatY, String nama) {
         this.id = id;
         this.koordinatX = koordinatX;
         this.koordinatY = koordinatY;
