@@ -2,6 +2,7 @@ package com.tekmob.mapx;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -104,9 +106,9 @@ public class MainActivity extends AppCompatActivity
         mapFragment.getMapAsync(this);
 
 
+        android.view.View fragment =  findViewById (R.id.place_autocomplete_fragment);
 
-
-
+        fragment.setBackgroundColor(Color.WHITE);
 
 
 
@@ -402,7 +404,7 @@ public class MainActivity extends AppCompatActivity
     // The method that displays the popup.
     private void showPopup(final Activity context, LatLng latLng) {
         int popupWidth = 500;
-        int popupHeight = 250;
+        int popupHeight = 200;
 
         // Inflate the popup_layout.xml
         LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.pop_up);
@@ -421,7 +423,7 @@ public class MainActivity extends AppCompatActivity
         popup.setBackgroundDrawable(new BitmapDrawable());
 
         // Displaying the popup at the specified location, + offsets.
-        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 800, 2000);
+        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 900, 2000);
 
 
     }
