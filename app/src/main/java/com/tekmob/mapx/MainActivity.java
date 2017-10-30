@@ -328,6 +328,23 @@ public class MainActivity extends AppCompatActivity
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
+
+
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                String title =  marker.getTitle();
+                if(title.equalsIgnoreCase("new")){
+
+                    marker.remove();
+                    popup.dismiss();
+                }
+                return false;
+            }
+        });
+
+
     }
 // Old Search Without Helper
 // public void onMapSearch(View view) {
@@ -372,20 +389,6 @@ public class MainActivity extends AppCompatActivity
         showPopup(this , latLng );
 
 
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                String title =  marker.getTitle();
-                if(title.equalsIgnoreCase("new")){
-
-                    marker.remove();
-                    popup.dismiss();
-                }
-                return false;
-            }
-        });
-
-
 
 
     }
@@ -393,7 +396,23 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onPlaceSelected(Place place) {
 
+        if (aMaker != null) {
+            aMaker.remove();
+            popup.dismiss();
+        }
+
+
+        MarkerOptions marker = new MarkerOptions().position(place.getLatLng()).title("new");
+        aMaker = mMap.addMarker(marker);
+
         mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(place.getLatLng() , 17) );
+
+        showPopup(this , place.getLatLng() );
+
+
+
+
+
     }
 
     @Override
