@@ -2,6 +2,7 @@ package com.tekmob.mapx;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -140,6 +142,10 @@ public class MainActivity extends AppCompatActivity
         for(Akun b:listAkun){
             Log.d("data", "ID :"+b.getId()+" | USERNAME :"+b.getUsername()+" | EMAIL:"+b.getEmail());
         }
+        android.view.View fragment =  findViewById (R.id.place_autocomplete_fragment);
+
+        fragment.setBackgroundColor(Color.WHITE);
+
     }
 
 
@@ -355,6 +361,23 @@ public class MainActivity extends AppCompatActivity
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
+
+
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                String title =  marker.getTitle();
+                if(title.equalsIgnoreCase("new")){
+
+                    marker.remove();
+                    popup.dismiss();
+                }
+                return false;
+            }
+        });
+
+
     }
 // Old Search Without Helper
 // public void onMapSearch(View view) {
@@ -399,20 +422,6 @@ public class MainActivity extends AppCompatActivity
         showPopup(this , latLng );
 
 
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                String title =  marker.getTitle();
-                if(title.equalsIgnoreCase("new")){
-
-                    marker.remove();
-                    popup.dismiss();
-                }
-                return false;
-            }
-        });
-
-
 
 
     }
@@ -420,7 +429,23 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onPlaceSelected(Place place) {
 
+        if (aMaker != null) {
+            aMaker.remove();
+            popup.dismiss();
+        }
+
+
+        MarkerOptions marker = new MarkerOptions().position(place.getLatLng()).title("new");
+        aMaker = mMap.addMarker(marker);
+
         mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(place.getLatLng() , 17) );
+
+        showPopup(this , place.getLatLng() );
+
+
+
+
+
     }
 
     @Override
@@ -431,27 +456,29 @@ public class MainActivity extends AppCompatActivity
     // The method that displays the popup.
     private void showPopup(final Activity context, LatLng latLng) {
         int popupWidth = 500;
-        int popupHeight = 250;
+        int popupHeight = 200;
 
         // Inflate the popup_layout.xml
-//        LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.pop_up);
-//        LayoutInflater layoutInflater = (LayoutInflater) context
-//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        View layout = layoutInflater.inflate(R.layout.pop_up_button, viewGroup);
+        LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.pop_up);
+        LayoutInflater layoutInflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.pop_up_button, viewGroup);
 
-//        // Creating the PopupWindow
-//          popup = new PopupWindow(context);
-//        popup.setContentView(layout);
-//        popup.setWidth(popupWidth);
-//        popup.setHeight(popupHeight);
+        // Creating the PopupWindow
+          popup = new PopupWindow(context);
+        popup.setContentView(layout);
+        popup.setWidth(popupWidth);
+        popup.setHeight(popupHeight);
 
+        // Displaying the popup at the specified location, + offsets.
+        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 900, 2000);
 
-//        // Clear the default translucent background
-//        popup.setBackgroundDrawable(new BitmapDrawable());
-//
-//        // Displaying the popup at the specified location, + offsets.
-//        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 800, 2000);
-//
+        // Clear the default translucent background
+        popup.setBackgroundDrawable(new BitmapDrawable());
+
+        // Displaying the popup at the specified location, + offsets.
+        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 800, 2000);
+
 
     }
 }
