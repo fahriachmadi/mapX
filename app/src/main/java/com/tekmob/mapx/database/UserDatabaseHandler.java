@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Conqueror on 10/30/2017.
  */
 
-public class UserDatabaseHandler extends SQLiteOpenHelper {
+public class UserDatabaseHandler{
 //    private static final int DATABASE_VERSION = 1;
 //
 //    private static final String DATABASE_NAME = "AkunManager";
