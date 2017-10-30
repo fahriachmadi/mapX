@@ -1,13 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-<<<<<<< HEAD
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
-=======
-    compileSdkVersion 24
-    buildToolsVersion '25.0.0'
->>>>>>> 933674fa2b05494e030a7f2f1d6fbd74b8bbcdd0
 
     defaultConfig {
         applicationId "com.tekmob.mapx"
@@ -15,7 +10,6 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -31,16 +25,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-<<<<<<< HEAD
     testCompile 'junit:junit:4.12'
+
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:23.2.1'
-    compile 'com.google.android.gms:play-services:6.5.87'
-=======
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:design:23.2.1'
-    compile 'com.google.android.gms:play-services:9.8.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
->>>>>>> 933674fa2b05494e030a7f2f1d6fbd74b8bbcdd0
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.google.android.gms:play-services:11.0.4'
+    compile 'com.google.android.gms:play-services-ads:11.0.4'
+    compile 'com.google.android.gms:play-services-auth:11.0.4'
+    compile 'com.google.android.gms:play-services-gcm:11.0.4'
 }

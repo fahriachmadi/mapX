@@ -405,24 +405,24 @@ public class MainActivity extends AppCompatActivity
         int popupHeight = 250;
 
         // Inflate the popup_layout.xml
-        LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.pop_up);
-        LayoutInflater layoutInflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = layoutInflater.inflate(R.layout.pop_up_button, viewGroup);
+//        LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.pop_up);
+//        LayoutInflater layoutInflater = (LayoutInflater) context
+//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View layout = layoutInflater.inflate(R.layout.pop_up_button, viewGroup);
 
-        // Creating the PopupWindow
-          popup = new PopupWindow(context);
-        popup.setContentView(layout);
-        popup.setWidth(popupWidth);
-        popup.setHeight(popupHeight);
+//        // Creating the PopupWindow
+//          popup = new PopupWindow(context);
+//        popup.setContentView(layout);
+//        popup.setWidth(popupWidth);
+//        popup.setHeight(popupHeight);
 
 
-        // Clear the default translucent background
-        popup.setBackgroundDrawable(new BitmapDrawable());
-
-        // Displaying the popup at the specified location, + offsets.
-        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 800, 2000);
-
+//        // Clear the default translucent background
+//        popup.setBackgroundDrawable(new BitmapDrawable());
+//
+//        // Displaying the popup at the specified location, + offsets.
+//        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 800, 2000);
+//
 
     }
 }
