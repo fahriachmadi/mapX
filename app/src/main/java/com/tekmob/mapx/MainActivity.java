@@ -58,6 +58,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.tekmob.mapx.database.AkunDatabaseHandler;
+import com.tekmob.mapx.domain.Akun;
 
 import java.io.IOException;
 import java.sql.Types;
@@ -106,16 +108,47 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        AkunDatabaseHandler databaseHandler=new AkunDatabaseHandler(this);
 
+//        Log.d("insert", "inserting data");
+//        databaseHandler.save(new Akun("agung", "Agung Setiawan", "fahri.conqueror@gmail.com"));
+//        databaseHandler.save(new Akun("hauril","Hauril Maulida Nisfari", "fahri.conqueror@gmail.com"));
+//
+//        Log.d("reading", "reading all data");
+//        List<Akun> listAkun=databaseHandler.findAll();
+//        for(Akun b:listAkun){
+//            Log.d("data", "ID :"+b.getId()+" | USERNAME :"+b.getUsername()+" | EMAIL:"+b.getEmail());
+//        }
+//
+//        Log.d("reading","reading one data");
+//        Akun b=databaseHandler.findOne(2);
+//        Log.d("data", "ID :"+b.getId()+" | USERNAME :"+b.getUsername()+" | EMAIL:"+b.getEmail());
+//
+//        Log.d("update","updating data");
+//        b.setUsername("Map");
+//        databaseHandler.update(b);
+//        Log.d("reading","reading one data after update");
+//        Akun bUpdate=databaseHandler.findOne(2);
+//        Log.d("data", "ID :"+b.getId()+" | USERNAME :"+b.getUsername()+" | EMAIL:"+b.getEmail());
+//
+//        Log.d("delete", "deleting data");
+//        b = databaseHandler.findOne(2);
+//        databaseHandler.delete(b);
+//        Log.d("reading", "reading all data after delete");
+//        List<Akun> listAkun2=databaseHandler.findAll();
+//        for(Akun b2:listAkun2){
+//            Log.d("data", "ID :"+b2.getId()+" | USERNAME :"+b2.getUsername()+" | EMAIL:"+b2.getEmail());
+//        }
+        List<Akun> listAkun=databaseHandler.findAll();
+        for(Akun b:listAkun){
+            Log.d("data", "ID :"+b.getId()+" | USERNAME :"+b.getUsername()+" | EMAIL:"+b.getEmail());
+        }
         android.view.View fragment =  findViewById (R.id.place_autocomplete_fragment);
 
         fragment.setBackgroundColor(Color.WHITE);
 
-
-
-
-
     }
+
 
 
 
@@ -423,8 +456,8 @@ public class MainActivity extends AppCompatActivity
 
     // The method that displays the popup save location
     private void showPopup(final Activity context, final LatLng latLng) {
-        int popupWidth = 500;
-        int popupHeight = 200;
+        int popupWidth = 440;
+        int popupHeight = 140;
 
         // Inflate the popup_layout.xml
         LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.pop_up);
@@ -438,12 +471,13 @@ public class MainActivity extends AppCompatActivity
         popup.setWidth(popupWidth);
         popup.setHeight(popupHeight);
 
+        // Displaying the popup at the specified location, + offsets.
+        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 900, 1800);
 
         // Clear the default translucent background
         popup.setBackgroundDrawable(new BitmapDrawable());
 
-        // Displaying the popup at the specified location, + offsets.
-        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 900, 2000);
+
 
 
         clickButton = (Button)layout.findViewById(R.id.button_for_pop_up);
