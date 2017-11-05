@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fcfbfb"
+    android:orientation="vertical"
+    android:id="@+id/pop_up_layer_linear"
+
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Save Location"
+        android:textColor="#080808"
+        android:textSize="33dp"
+        android:textStyle="bold" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/full_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#080808"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:id="@+id/your_full_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#080808"
+            android:hint="Koordinat"
+            android:textColorHint="#080808"
+            android:inputType="textPersonName" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/email_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#080808"
+        >
+
+        <EditText
+            android:id="@+id/your_email_address"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#080808"
+            android:hint="Nama Tempat"
+
+
+            android:textColor="#080808"
+            />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Jenis Tempat"
+            android:textColor="#080808"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <RadioGroup
+        android:id="@+id/jenis_tempat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/radioWifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wifi Gratis"
+            android:checked="true"
+            android:textColor="#080808"
+            />
+
+        <RadioButton
+            android:id="@+id/radioTempatMakan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tempat Makan"
+            android:textColor="#080808"
+            />
+
+        <RadioButton
+            android:id="@+id/radioTempatNongkrong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tempat Nongkrong"
+            android:textColor="#080808"
+            />
+
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/save_this_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_login"
+        android:text="Save This Location"
+        android:textColor="#f16f7d"
+        android:textAllCaps="false"
+        android:padding="16dp"
+        android:clickable="true"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_marginTop="24dp"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/not_this_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_signup"
+        android:text="Not This Time"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textColor="#fff"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:padding="16dp"/>
+
+
+</LinearLayout>
