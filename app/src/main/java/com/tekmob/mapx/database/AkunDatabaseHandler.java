@@ -72,6 +72,21 @@ public class AkunDatabaseHandler extends SQLiteOpenHelper {
         return new Akun(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2), cursor.getString(3));
     }
 
+    public Akun findOne(String username){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(TABLE_AKUN, new String[]{KEY_ID,KEY_USERNAME,KEY_PASSWORD,KEY_EMAIL},
+                KEY_USERNAME+"=?", new String[]{String.valueOf(username)}, null, null, null);
+
+        if(cursor.getCount() < 1){
+            cursor.close();
+            return null;
+        }
+        cursor.moveToFirst();
+        Akun res = new Akun(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2), cursor.getString(3));
+        cursor.close();
+        return res;
+    }
+
     public List<Akun> findAll(){
         List<Akun> listAkun=new ArrayList<Akun>();
         String query="SELECT * FROM "+TABLE_AKUN;

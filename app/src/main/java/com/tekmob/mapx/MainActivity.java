@@ -110,9 +110,9 @@ public class MainActivity extends AppCompatActivity
 
         AkunDatabaseHandler databaseHandler=new AkunDatabaseHandler(this);
 
-//        Log.d("insert", "inserting data");
-//        databaseHandler.save(new Akun("agung", "Agung Setiawan", "fahri.conqueror@gmail.com"));
-//        databaseHandler.save(new Akun("hauril","Hauril Maulida Nisfari", "fahri.conqueror@gmail.com"));
+        Log.d("insert", "inserting data");
+        databaseHandler.save(new Akun("agung", "Agung Setiawan", "fahri.conqueror@gmail.com"));
+        databaseHandler.save(new Akun("hauril","Hauril Maulida Nisfari", "fahri.conqueror@gmail.com"));
 //
 //        Log.d("reading", "reading all data");
 //        List<Akun> listAkun=databaseHandler.findAll();
@@ -500,5 +500,9 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-
+    public void logout(MenuItem item) {
+        Toast.makeText(this, "Signout", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+    }
 }

@@ -43,6 +43,7 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".SaveLocation"></activity>
         <activity android:name=".AkunActivity"></activity>
+        <activity android:name=".Signup"></activity>
 
     </application>
 
