@@ -2,6 +2,7 @@ package com.tekmob.mapx;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity
     LocationRequest mLocationRequest;
     Marker aMaker;
     PopupWindow popup;
-
+    Button clickButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -453,10 +454,10 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    // The method that displays the popup.
-    private void showPopup(final Activity context, LatLng latLng) {
-        int popupWidth = 500;
-        int popupHeight = 200;
+    // The method that displays the popup save location
+    private void showPopup(final Activity context, final LatLng latLng) {
+        int popupWidth = 440;
+        int popupHeight = 140;
 
         // Inflate the popup_layout.xml
         LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.pop_up);
@@ -471,14 +472,33 @@ public class MainActivity extends AppCompatActivity
         popup.setHeight(popupHeight);
 
         // Displaying the popup at the specified location, + offsets.
-        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 900, 2000);
+        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 900, 1800);
 
         // Clear the default translucent background
         popup.setBackgroundDrawable(new BitmapDrawable());
 
-        // Displaying the popup at the specified location, + offsets.
-        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 800, 2000);
+
+
+
+        clickButton = (Button)layout.findViewById(R.id.button_for_pop_up);
+
+
+        clickButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(context, SaveLocation.class);
+
+
+                intent.putExtra("koordinat", latLng.toString());
+                startActivity(intent);
+
+            }
+        });
 
 
     }
+
+
 }

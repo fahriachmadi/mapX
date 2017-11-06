@@ -41,7 +41,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".SaveLocation"></activity>
         <activity android:name=".AkunActivity"></activity>
+
     </application>
 
 </manifest>
