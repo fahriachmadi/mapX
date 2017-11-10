@@ -34,6 +34,8 @@ public class Login extends AppCompatActivity {
         Log.d("insert", "inserting data");
         databaseHandler.save(new Akun("agung", "Agung Setiawan", "fahri.conqueror@gmail.com"));
         databaseHandler.save(new Akun("hauril","Hauril Maulida Nisfari", "fahri.conqueror@gmail.com"));
+        databaseHandler.save(new Akun("user","pass", "fahri.conqueror@gmail.com"));
+
         LoginButton();
     }
 

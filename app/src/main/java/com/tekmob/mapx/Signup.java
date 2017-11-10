@@ -48,7 +48,7 @@ public class Signup extends AppCompatActivity {
                         String passStr = password.getText().toString();
                         String confPassStr = confirmPassword.getText().toString();
 
-                        if (usernameStr.equals("") || confPassStr.equals("") || passStr.equals("")) {
+                        if (usernameStr.equals("") || confPassStr.equals("") || passStr.equals("") || !passStr.equals(confPassStr)) {
                             Toast.makeText(Signup.this,"Cannot be empty", Toast.LENGTH_SHORT).show();
                         } else {
                             Akun res = db.findOne(usernameStr);

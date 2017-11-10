@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -23,8 +24,13 @@ public class SaveLocation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pop_up_layer);
         Intent intent = getIntent();
+        String koordinat = intent.getStringExtra("koordinat");
+        System.out.println(koordinat);
         final Context context = this;
         Button not_this_time = (Button)findViewById(R.id.not_this_time);
+        EditText editText = (EditText)findViewById(R.id.text_koordinat);
+        editText.setText(koordinat, TextView.BufferType.EDITABLE);
+
         not_this_time.setOnClickListener( new View.OnClickListener() {
 
             @Override
