@@ -38,10 +38,13 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_PENANDA_TABLE = "CREATE TABLE " + TABLE_PENANDA + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_ID_MAPS + " INTEGER,"
-                + KEY_NAMA + " TEXT," + KEY_KETERANGAN + " TEXT" + KEY_KATEGORI + " TEXT," + KEY_TIMESTAMP + " TEXT," +
-                "FOREIGN KEY(" + KEY_ID_MAPS + ")REFERENCES " + TABLE_MAPS + "(" +
-        KEY_ID_MAPS +"))";
+                + KEY_ID + " INTEGER PRIMARY KEY,"
+                + KEY_ID_MAPS + " INTEGER,"
+                + KEY_NAMA + " TEXT,"
+                + KEY_KETERANGAN + " TEXT,"
+                + KEY_KATEGORI + " TEXT,"
+                + KEY_TIMESTAMP + " TEXT,"
+                + "FOREIGN KEY(" + KEY_ID_MAPS + ")REFERENCES " + TABLE_MAPS + "(" + KEY_ID_MAPS +"))";
         db.execSQL(CREATE_PENANDA_TABLE);
     }
 
@@ -59,6 +62,7 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
         values.put(KEY_NAMA, penanda.getNama());
         values.put(KEY_KETERANGAN, penanda.getKeterangan());
         values.put(KEY_KATEGORI, penanda.getKategori());
+
         values.put(KEY_TIMESTAMP, penanda.getTimestamp());
 
         db.insert(TABLE_PENANDA, null, values);

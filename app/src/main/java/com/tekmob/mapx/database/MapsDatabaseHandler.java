@@ -36,8 +36,10 @@ public class MapsDatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_MAPS_TABLE = "CREATE TABLE " + TABLE_MAPS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_KOORDINAT_X + " TEXT,"
-                + KEY_KOORDINAT_Y + " TEXT," + KEY_NAMA + " TEXT" + ")";
+                + KEY_ID + " INTEGER PRIMARY KEY,"
+                + KEY_KOORDINAT_X + " TEXT,"
+                + KEY_KOORDINAT_Y + " TEXT,"
+                + KEY_NAMA + " TEXT" + ")";
         db.execSQL(CREATE_MAPS_TABLE);
     }
 
@@ -92,6 +94,21 @@ public class MapsDatabaseHandler extends SQLiteOpenHelper {
 
         return listMaps;
     }
+
+
+    public int findlastid(){
+        List<Maps> listMaps=new ArrayList<Maps>();
+        String query="SELECT * FROM "+ TABLE_MAPS + " ORDER BY "+ KEY_ID + " DESC LIMIT 1";
+
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery(query, null);
+
+        cursor.moveToFirst();
+        return Integer.valueOf(cursor.getString(0));
+    }
+
+
+
 
     public void update(Maps maps){
         SQLiteDatabase db=this.getWritableDatabase();

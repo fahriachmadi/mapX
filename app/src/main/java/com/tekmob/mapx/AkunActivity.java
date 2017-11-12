@@ -29,10 +29,10 @@ public class AkunActivity extends Activity {
         databaseHandler.save(new Akun("hauril","Hauril Maulida Nisfari", "fahri.conqueror@gmail.com"));
 
         Log.d("reading", "reading all data");
-        List<Akun> listAkun=databaseHandler.findAll();
-        for(Akun b:listAkun){
-            Log.d("data", "ID :"+b.getId()+" | USERNAME :"+b.getUsername()+" | EMAIL:"+b.getEmail());
-        }
+//        List<Akun> listAkun=databaseHandler.findAll();
+//        for(Akun b:listAkun){
+//            Log.d("data", "ID :"+b.getId()+" | USERNAME :"+b.getUsername()+" | EMAIL:"+b.getEmail());
+//        }
 
         Log.d("reading","reading one data");
         Akun b=databaseHandler.findOne(2);
