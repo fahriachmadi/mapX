@@ -61,9 +61,10 @@ public class Login extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            Toast.makeText(Login.this,"Username and password is correct",
+                            Toast.makeText(Login.this,"Username and password is correct with user id = " + res.getId(),
                                     Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(context, MainActivity.class);
+                            intent.putExtra("id", res.getId());
                             startActivity(intent);
                         }
 //                        if (username.getText().toString().equals("user") && password.getText().toString().equals("pass")) {

@@ -202,7 +202,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                int value = extras.getInt("id");
+                Toast.makeText(MainActivity.this,"User id = " + value,
+                        Toast.LENGTH_SHORT).show();
+                //The key argument here must match that used in the other activity
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
