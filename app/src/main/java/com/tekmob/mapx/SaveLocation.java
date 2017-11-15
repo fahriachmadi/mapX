@@ -135,19 +135,19 @@ public class SaveLocation extends AppCompatActivity {
 
 
 //            //Test Save DB
-//                List<Penanda> listPenanda=databasePenandaHandler.findAll();
-//                for(Penanda b:listPenanda){
-//                    Log.d("data", "ID :"+b.getId()+ "|ID MAPS :"+b.getIdMaps() +" | Nama Tempat :"+b.getNama()+" | Nama Keterangan:"+b.getKeterangan() +
-//                            " |Kategori :"+b.getKategori()+" |Waktu :"+b.getTimestamp()
-//                    );
-//                }
+                List<Penanda> listPenanda=databasePenandaHandler.findAll();
+                for(Penanda b:listPenanda){
+                    Log.d("data", "ID :"+b.getId()+ "|ID MAPS :"+b.getIdMaps() +" | Nama Tempat :"+b.getNama()+" | Nama Keterangan:"+b.getKeterangan() +
+                            " |Kategori :"+b.getKategori()+" |Waktu :"+b.getTimestamp()
+                    );
+                }
 //
 //                //Test Save DB
-//                List<Maps> listMap=databaseMapsHandler.findAll();
-//                for(Maps b:listMap){
-//                    Log.d("data", "ID :"+b.getId()
-//                    );
-//                }
+                List<Maps> listMap=databaseMapsHandler.findAll();
+                for(Maps b:listMap){
+                    Log.d("data", "ID :"+b.getId()
+                    );
+                }
 
 
 
