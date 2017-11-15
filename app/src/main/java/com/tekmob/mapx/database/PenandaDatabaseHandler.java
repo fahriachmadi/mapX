@@ -25,6 +25,7 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
     private static final String TABLE_MAPS = "t_maps";
 
     private static final String KEY_ID = "id";
+    private static final String KEY_ID_USER = "idUser";
     private static final String KEY_ID_MAPS = "idMaps";
     private static final String KEY_NAMA = "nama";
     private static final String KEY_KETERANGAN = "keterangan";
@@ -40,6 +41,7 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
         String CREATE_PENANDA_TABLE = "CREATE TABLE " + TABLE_PENANDA + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_ID_MAPS + " INTEGER,"
+                + KEY_ID_USER + " INTEGER,"
                 + KEY_NAMA + " TEXT,"
                 + KEY_KETERANGAN + " TEXT,"
                 + KEY_KATEGORI + " TEXT,"
@@ -59,6 +61,8 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
         values.put(KEY_ID_MAPS, penanda.getIdMaps());
+        values.put(KEY_ID_USER, penanda.getIdUser());
+
         values.put(KEY_NAMA, penanda.getNama());
         values.put(KEY_KETERANGAN, penanda.getKeterangan());
         values.put(KEY_KATEGORI, penanda.getKategori());
@@ -80,7 +84,7 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
 
 
         return new Penanda(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1)),cursor.getString(2), cursor.getString(3),
-                cursor.getString(4),cursor.getString(5));
+                cursor.getString(4),cursor.getString(5),0);
     }
 
     public List<Penanda> findAll(){
@@ -95,10 +99,12 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
                 Penanda penanda=new Penanda();
                 penanda.setId(Integer.valueOf(cursor.getString(0)));
                 penanda.setIdMaps(Integer.valueOf(cursor.getString(1)));
-                penanda.setNama(cursor.getString(2));
-                penanda.setKeterangan(cursor.getString(3));
-                penanda.setKategori(cursor.getString(4));
-                penanda.setTimestamp(cursor.getString(5));
+                penanda.setIdUser(Integer.valueOf(cursor.getString(2)));
+
+                penanda.setNama(cursor.getString(3));
+                penanda.setKeterangan(cursor.getString(4));
+                penanda.setKategori(cursor.getString(5));
+                penanda.setTimestamp(cursor.getString(6));
                 listPenanda.add(penanda);
             }while(cursor.moveToNext());
         }

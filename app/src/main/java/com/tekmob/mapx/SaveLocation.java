@@ -42,7 +42,7 @@ public class SaveLocation extends AppCompatActivity {
     EditText editTextKeterangan;
     RadioGroup radioGroup;
     RadioButton radioButton;
-
+    Bundle extras;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +57,7 @@ public class SaveLocation extends AppCompatActivity {
 
         String koordinat = intent.getStringExtra("koordinat");
         StringTokenizer str = new StringTokenizer(koordinat);
-
+        extras = getIntent().getExtras();
 
         str.nextToken("(");
 
@@ -76,7 +76,8 @@ public class SaveLocation extends AppCompatActivity {
 
 
 
-
+        int value = extras.getInt("id");
+        System.out.println( extras.getInt("id"));
 
 
 
@@ -123,12 +124,12 @@ public class SaveLocation extends AppCompatActivity {
                 // find the radiobutton by returned id
                 radioButton = (RadioButton) findViewById(selectedId);
 
-                System.out.println(map.getId());
+              //  System.out.println(map.getId());
 
                 String isiRadio = radioButton.getText().toString();
 
                 Penanda penanda = new Penanda(databaseMapsHandler.findlastid(),editTextNamaTempat.getText().toString(),editTextKeterangan.getText().toString()
-                        ,isiRadio, DateFormat.getDateTimeInstance().format(new Date()));
+                        ,isiRadio, DateFormat.getDateTimeInstance().format(new Date()), extras.getInt("id"));
 
 
                 databasePenandaHandler.save(penanda);
@@ -137,7 +138,7 @@ public class SaveLocation extends AppCompatActivity {
 //            //Test Save DB
                 List<Penanda> listPenanda=databasePenandaHandler.findAll();
                 for(Penanda b:listPenanda){
-                    Log.d("data", "ID :"+b.getId()+ "|ID MAPS :"+b.getIdMaps() +" | Nama Tempat :"+b.getNama()+" | Nama Keterangan:"+b.getKeterangan() +
+                    Log.d("data", "ID :"+b.getId()+ "|ID MAPS :"+b.getIdMaps() +"|ID User :"+b.getIdUser() +" | Nama Tempat :"+b.getNama()+" | Nama Keterangan:"+b.getKeterangan() +
                             " |Kategori :"+b.getKategori()+" |Waktu :"+b.getTimestamp()
                     );
                 }
