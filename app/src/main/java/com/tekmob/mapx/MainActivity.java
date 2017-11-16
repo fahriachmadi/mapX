@@ -82,15 +82,15 @@ public class MainActivity extends AppCompatActivity
     Marker aMaker;
     PopupWindow popup;
     Button clickButton;
-
+    Bundle extras;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
+    //get id user
+        extras = getIntent().getExtras();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -203,6 +203,12 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+            if (extras != null) {
+                int value = extras.getInt("id");
+                Toast.makeText(MainActivity.this,"User id = " + value,
+                        Toast.LENGTH_SHORT).show();
+                //The key argument here must match that used in the other activity
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -489,7 +495,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(context, SaveLocation.class);
-
+                intent.putExtra("id", extras.getInt("id"));
 
                 intent.putExtra("koordinat", latLng.toString());
                 startActivity(intent);

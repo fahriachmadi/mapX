@@ -5,8 +5,8 @@ package com.tekmob.mapx.domain;
  */
 public class Penanda {
     private int id;
-    private int idUser;
     private int idMaps;
+    private int idUser;
     private String nama;
     private String keterangan;
     private String kategori;
@@ -21,9 +21,11 @@ public class Penanda {
         this.keterangan = keterangan;
         this.kategori = kategori;
         this.timestamp = timestamp;
+        this.idUser = idUser;
     }
 
     public Penanda(int id, int idUser, int idMaps, String nama, String keterangan, String kategori, String timestamp) {
+
         this.id = id;
         this.idUser = idUser;
         this.idMaps = idMaps;
@@ -31,6 +33,8 @@ public class Penanda {
         this.keterangan = keterangan;
         this.kategori = kategori;
         this.timestamp = timestamp;
+        this.idUser = idUser;
+
     }
 
     public int getId() {
@@ -40,6 +44,15 @@ public class Penanda {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
 
     public int getIdMaps() {
         return idMaps;
@@ -81,11 +94,4 @@ public class Penanda {
         this.timestamp = timestamp;
     }
 
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
 }
