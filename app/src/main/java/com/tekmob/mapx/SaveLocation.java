@@ -127,6 +127,7 @@ public class SaveLocation extends AppCompatActivity {
 
                 String isiRadio = radioButton.getText().toString();
 
+
                 Penanda penanda = new Penanda(databaseMapsHandler.findlastid(),editTextNamaTempat.getText().toString(),editTextKeterangan.getText().toString()
                         ,isiRadio, DateFormat.getDateTimeInstance().format(new Date()));
 

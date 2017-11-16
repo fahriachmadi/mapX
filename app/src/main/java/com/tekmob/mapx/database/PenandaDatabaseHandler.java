@@ -23,8 +23,10 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
 
     private static final String TABLE_PENANDA = "t_penanda";
     private static final String TABLE_MAPS = "t_maps";
+    private static final String TABLE_USER = "t_user";
 
     private static final String KEY_ID = "id";
+    private static final String KEY_ID_USER = "idUser";
     private static final String KEY_ID_MAPS = "idMaps";
     private static final String KEY_NAMA = "nama";
     private static final String KEY_KETERANGAN = "keterangan";
@@ -40,11 +42,13 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
         String CREATE_PENANDA_TABLE = "CREATE TABLE " + TABLE_PENANDA + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_ID_MAPS + " INTEGER,"
+                + KEY_ID_USER + " INTEGER,"
                 + KEY_NAMA + " TEXT,"
                 + KEY_KETERANGAN + " TEXT,"
                 + KEY_KATEGORI + " TEXT,"
                 + KEY_TIMESTAMP + " TEXT,"
-                + "FOREIGN KEY(" + KEY_ID_MAPS + ")REFERENCES " + TABLE_MAPS + "(" + KEY_ID_MAPS +"))";
+                + "FOREIGN KEY(" + KEY_ID_USER + ")REFERENCES " + TABLE_USER + "(" + KEY_ID     +"),"
+                + "FOREIGN KEY(" + KEY_ID_MAPS + ")REFERENCES " + TABLE_MAPS + "(" + KEY_ID +"))";
         db.execSQL(CREATE_PENANDA_TABLE);
     }
 
