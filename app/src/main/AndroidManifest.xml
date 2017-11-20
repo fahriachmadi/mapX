@@ -48,6 +48,8 @@
         <activity android:name=".AkunActivity"></activity>
         <activity android:name=".Signup"></activity>
         <activity android:name=".ProfileDesign"></activity>
+
+        <activity android:name=".PenandaActivity"></activity>
     </application>
 
 </manifest>

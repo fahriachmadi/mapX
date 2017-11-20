@@ -33,6 +33,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginLeft="29dp"
             android:layout_marginStart="29dp"
+            android:textColor="@color/colorPrimaryDark"
             android:orientation="horizontal">
 
             <TextView
@@ -50,7 +51,6 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="fahri"
                 android:layout_centerHorizontal="true"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp" />
@@ -63,12 +63,13 @@
             android:layout_below="@+id/username_layout"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginLeft="29dp"
             android:layout_marginStart="29dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textview_email"
+                android:id="@+id/textview_name"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -78,11 +79,10 @@
                 android:layout_marginTop="16dp" />
 
             <TextView
-                android:id="@+id/textview_email_id"
+                android:id="@+id/textview_name_id"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Fahri Achmadi"
                 android:layout_centerHorizontal="true"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp" />
@@ -95,6 +95,7 @@
             android:layout_below="@+id/name_layout"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginLeft="29dp"
             android:layout_marginStart="29dp"
             android:orientation="horizontal">
@@ -114,7 +115,6 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="fahri.conqueror@gmail.com"
                 android:layout_centerHorizontal="true"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp" />

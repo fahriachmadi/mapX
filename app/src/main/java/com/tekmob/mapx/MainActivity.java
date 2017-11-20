@@ -36,6 +36,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -60,6 +61,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.tekmob.mapx.database.AkunDatabaseHandler;
 import com.tekmob.mapx.domain.Akun;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.sql.Types;
@@ -109,6 +112,7 @@ public class MainActivity extends AppCompatActivity
         mapFragment.getMapAsync(this);
 
         AkunDatabaseHandler databaseHandler=new AkunDatabaseHandler(this);
+
 
         Log.d("insert", "inserting data");
         databaseHandler.save(new Akun("agung", "Agung Setiawan", "fahri.conqueror@gmail.com"));
@@ -192,13 +196,23 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            // TODO Auto-generated method stub
+
+            Intent intent = new Intent(this, PenandaActivity.class);
+            intent.putExtra("id", extras.getInt("id"));
+
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
+            // TODO Auto-generated method stub
 
+            Intent intent = new Intent(this, ProfileDesign.class);
+            intent.putExtra("id", extras.getInt("id"));
+
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -248,7 +262,8 @@ public class MainActivity extends AppCompatActivity
             mCurrLocationMarker.remove();
         }
 
-        //Place current location marker
+        //Place cur
+        // rent location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);

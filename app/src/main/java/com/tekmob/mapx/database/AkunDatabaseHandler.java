@@ -84,6 +84,7 @@ public class AkunDatabaseHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
         Akun res = new Akun(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2), cursor.getString(3));
         cursor.close();
+        db.close();
         return res;
     }
 
@@ -104,7 +105,8 @@ public class AkunDatabaseHandler extends SQLiteOpenHelper {
                 listAkun.add(akun);
             }while(cursor.moveToNext());
         }
-
+        cursor.close();
+        db.close();
         return listAkun;
     }
 
