@@ -121,6 +121,9 @@ public class SaveLocation extends AppCompatActivity {
 
 
 
+                intent.putExtra("id", extras.getInt("id"));
+
+
                 startActivity(intent);
 
             }
@@ -151,11 +154,11 @@ public class SaveLocation extends AppCompatActivity {
                 String isiRadio = radioButton.getText().toString();
 
 
-//                Penanda penanda = new Penanda(databaseMapsHandler.findlastid(),editTextNamaTempat.getText().toString(),editTextKeterangan.getText().toString()
-//                        ,isiRadio, DateFormat.getDateTimeInstance().format(new Date()), extras.getInt("id"));
+                Penanda penanda = new Penanda(databaseMapsHandler.findlastid(),extras.getInt("id"),editTextNamaTempat.getText().toString(),editTextKeterangan.getText().toString()
+                        ,isiRadio, DateFormat.getDateTimeInstance().format(new Date()));
 //
 //
-//                databasePenandaHandler.save(penanda);
+               databasePenandaHandler.save(penanda);
 
 
 //            //Test Save DB
@@ -177,6 +180,8 @@ public class SaveLocation extends AppCompatActivity {
 
                 Intent intent = new Intent(context, MainActivity.class);
 
+
+                intent.putExtra("id", extras.getInt("id"));
 
 
                 startActivity(intent);
@@ -203,6 +208,8 @@ public class SaveLocation extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+
             startActivityForResult(intent,CAM_REQUEST);
         }
     }
