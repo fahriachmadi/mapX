@@ -113,36 +113,20 @@ public class MainActivity extends AppCompatActivity
 
         AkunDatabaseHandler databaseHandler=new AkunDatabaseHandler(this);
 
+        View header = navigationView.getHeaderView(0);
 
-        Log.d("insert", "inserting data");
-        databaseHandler.save(new Akun("agung", "Agung Setiawan", "fahri.conqueror@gmail.com"));
-        databaseHandler.save(new Akun("hauril","Hauril Maulida Nisfari", "fahri.conqueror@gmail.com"));
-//
-//        Log.d("reading", "reading all data");
-//        List<Akun> listAkun=databaseHandler.findAll();
-//        for(Akun b:listAkun){
-//            Log.d("data", "ID :"+b.getId()+" | USERNAME :"+b.getUsername()+" | EMAIL:"+b.getEmail());
-//        }
-//
-//        Log.d("reading","reading one data");
-//        Akun b=databaseHandler.findOne(2);
-//        Log.d("data", "ID :"+b.getId()+" | USERNAME :"+b.getUsername()+" | EMAIL:"+b.getEmail());
-//
-//        Log.d("update","updating data");
-//        b.setUsername("Map");
-//        databaseHandler.update(b);
-//        Log.d("reading","reading one data after update");
-//        Akun bUpdate=databaseHandler.findOne(2);
-//        Log.d("data", "ID :"+b.getId()+" | USERNAME :"+b.getUsername()+" | EMAIL:"+b.getEmail());
-//
-//        Log.d("delete", "deleting data");
-//        b = databaseHandler.findOne(2);
-//        databaseHandler.delete(b);
-//        Log.d("reading", "reading all data after delete");
-//        List<Akun> listAkun2=databaseHandler.findAll();
-//        for(Akun b2:listAkun2){
-//            Log.d("data", "ID :"+b2.getId()+" | USERNAME :"+b2.getUsername()+" | EMAIL:"+b2.getEmail());
-//        }
+        TextView editTextUsername = (TextView)header.findViewById(R.id.header_username_id);
+        TextView editTextEmail = (TextView) header.findViewById(R.id.header_email_id);
+
+        Intent intent = getIntent();
+        extras = getIntent().getExtras();
+        int value = extras.getInt("id");
+
+        Akun akun = databaseHandler.findOne(value);
+        Log.d("data ", "ID :"+akun.getId()+" | NAMA :" + akun.getUsername()+" | KATEGORI:"+ akun.getEmail());
+        editTextUsername.setText(akun.getUsername());
+        editTextEmail.setText(akun.getEmail());
+
         List<Akun> listAkun=databaseHandler.findAll();
         for(Akun b:listAkun){
             Log.d("data", "ID :"+b.getId()+" | USERNAME :"+b.getUsername()+" | EMAIL:"+b.getEmail());
@@ -463,10 +447,6 @@ public class MainActivity extends AppCompatActivity
         mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(place.getLatLng() , 17) );
 
         showPopup(this , place.getLatLng() );
-
-
-
-
 
     }
 
