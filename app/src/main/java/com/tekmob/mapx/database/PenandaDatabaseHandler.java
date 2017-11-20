@@ -23,6 +23,7 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
 
     private static final String TABLE_PENANDA = "t_penanda";
     private static final String TABLE_MAPS = "t_maps";
+    private static final String TABLE_USER = "t_user";
 
     private static final String KEY_ID = "id";
     private static final String KEY_ID_USER = "idUser";
@@ -46,7 +47,8 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
                 + KEY_KETERANGAN + " TEXT,"
                 + KEY_KATEGORI + " TEXT,"
                 + KEY_TIMESTAMP + " TEXT,"
-                + "FOREIGN KEY(" + KEY_ID_MAPS + ")REFERENCES " + TABLE_MAPS + "(" + KEY_ID_MAPS +"))";
+                + "FOREIGN KEY(" + KEY_ID_USER + ")REFERENCES " + TABLE_USER + "(" + KEY_ID     +"),"
+                + "FOREIGN KEY(" + KEY_ID_MAPS + ")REFERENCES " + TABLE_MAPS + "(" + KEY_ID +"))";
         db.execSQL(CREATE_PENANDA_TABLE);
     }
 
@@ -83,8 +85,8 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
         }
 
 
-        return new Penanda(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1)),cursor.getString(2), cursor.getString(3),
-                cursor.getString(4),cursor.getString(5),0);
+        return new Penanda(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1)),Integer.parseInt(cursor.getString(2)), cursor.getString(3),
+                cursor.getString(4),cursor.getString(5), cursor.getString(6));
     }
 
     public List<Penanda> findAll(){

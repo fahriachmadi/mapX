@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f2f2">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="me.vable.android.viewandlayoutlessons.WelcomeActivity">
+        <TextView
+            android:id="@+id/textview_title_id"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="My Location"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp" />
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/table_layout_id"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/textview_title_id"
+            android:paddingTop="16dp">
+
+            <!--<TableRow-->
+                <!--android:id="@+id/table_row_id"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent">-->
+
+
+                <!--<TextView-->
+                    <!--android:id="@+id/table_row_nama_id"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textColor="@color/colorPrimaryDark"-->
+                    <!--android:width="120dp"-->
+                    <!--android:layout_column="1" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/table_row_kategori_id"-->
+                    <!--android:textColor="@color/colorPrimaryDark"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_column="2" />-->
+
+                <!--<TextView-->
+                    <!--android:text=""-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_column="3"/>-->
+
+            <!--</TableRow>-->
+
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:text="Warung Qimpul"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@color/colorPrimaryDark"-->
+                    <!--android:layout_column="1" />-->
+
+                <!--<TextView-->
+                    <!--android:text="Wifi Gratis"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@color/colorPrimaryDark"-->
+                    <!--android:layout_column="2" />-->
+
+                <!--<Button-->
+                    <!--style="@style/Widget.AppCompat.Button.Borderless.Colored"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@color/colorPrimaryDark"-->
+                    <!--android:textSize="14dp"-->
+                    <!--android:text="Lihat" />-->
+
+            <!--</TableRow>-->
+        </TableLayout>
+    </RelativeLayout>
+</ScrollView>

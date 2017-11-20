@@ -7,7 +7,6 @@ public class Penanda {
     private int id;
     private int idMaps;
     private int idUser;
-
     private String nama;
     private String keterangan;
     private String kategori;
@@ -15,7 +14,8 @@ public class Penanda {
 
     public Penanda(){}
 
-    public Penanda(int idMaps, String nama, String keterangan, String kategori, String timestamp, int idUser) {
+    public Penanda(int idUser, int idMaps, String nama, String keterangan, String kategori, String timestamp) {
+        this.idUser = idUser;
         this.idMaps = idMaps;
         this.nama = nama;
         this.keterangan = keterangan;
@@ -24,8 +24,10 @@ public class Penanda {
         this.idUser = idUser;
     }
 
-    public Penanda(int id, int idMaps, String nama, String keterangan, String kategori, String timestamp, int idUser) {
+    public Penanda(int id, int idUser, int idMaps, String nama, String keterangan, String kategori, String timestamp) {
+
         this.id = id;
+        this.idUser = idUser;
         this.idMaps = idMaps;
         this.nama = nama;
         this.keterangan = keterangan;
@@ -91,4 +93,5 @@ public class Penanda {
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
+
 }
