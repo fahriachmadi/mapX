@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -51,13 +52,16 @@ public class PenandaActivity extends AppCompatActivity {
                         TableLayout.LayoutParams.WRAP_CONTENT));
 
         String[] headerText={"No","Nama","Kategori"};
-
+        Log.d("data" , "data set");
         for(String c:headerText) {
             TextView tv = new TextView(this);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
             tv.setGravity(Gravity.CENTER);
             tv.setTextSize(18);
+            if(!c.equals("No"))
+            tv.setWidth(250);
+            tv.setTextColor(Color.BLACK);
             tv.setPadding(5, 5, 5, 5);
             tv.setText(c);
             tr_head.addView(tv);
@@ -70,8 +74,8 @@ public class PenandaActivity extends AppCompatActivity {
 
         dbPenanda = new PenandaDatabaseHandler(this);
         List<Penanda> allPenanda = dbPenanda.findAll();
-
-        Integer count=0;
+        Log.d("data", "datanya - " + allPenanda.size());
+        Integer count=1;
         for(Penanda p : allPenanda){
             Log.d("data ", "ID :"+p.getId()+" | NAMA :"+p.getNama()+" | KATEGORI:"+p.getKategori());
 
@@ -84,15 +88,28 @@ public class PenandaActivity extends AppCompatActivity {
             row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
                     TableLayout.LayoutParams.WRAP_CONTENT));
 
-            String[] colText={count+"",nama,kategori};
+            String[] colText={count+"",nama,kategori, "button"};
             for(String text:colText) {
+
                 TextView tv = new TextView(this);
                 tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                         TableRow.LayoutParams.WRAP_CONTENT));
+                if(text.equals("button")){
+                    Button button = new Button(this);
+                    button.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                            TableRow.LayoutParams.WRAP_CONTENT));
+                    button.setText("Detail");
+                    button.setBackgroundColor(Color.WHITE);
+                    button.setPadding(10,5,5,5);
+                    button.setTextColor(Color.BLACK);
+                    row.addView(button);
+                    continue;
+                }
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextSize(16);
                 tv.setPadding(5, 5, 5, 5);
                 tv.setText(text);
+                tv.setTextColor(Color.BLACK);
                 row.addView(tv);
             }
             count++;
