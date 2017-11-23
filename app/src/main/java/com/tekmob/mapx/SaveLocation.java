@@ -40,7 +40,7 @@ public class SaveLocation extends AppCompatActivity {
     MapsDatabaseHandler databaseMapsHandler;
     PenandaDatabaseHandler databasePenandaHandler;
 
-    EditText editText ;
+    TextView editText ;
     EditText editTextNamaTempat ;
     EditText editTextKeterangan;
     RadioGroup radioGroup;
@@ -72,7 +72,7 @@ public class SaveLocation extends AppCompatActivity {
             }
         });
 
-        editText = (EditText)findViewById(R.id.text_koordinat);
+        editText = (TextView)findViewById(R.id.text_koordinat);
         editTextNamaTempat = (EditText)findViewById(R.id.nama_tempat);
         editTextKeterangan = (EditText)findViewById(R.id.keterangan);
         radioGroup= (RadioGroup) findViewById(R.id.jenis_tempat);

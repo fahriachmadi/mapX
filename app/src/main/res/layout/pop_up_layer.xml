@@ -27,7 +27,7 @@
                 android:textSize="33dp"
                 android:textStyle="bold"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/text_koordinat"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -146,6 +146,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_signup"
                 android:text="Not This Time"
+
                 style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:textColor="#fff"
                 android:textAllCaps="false"

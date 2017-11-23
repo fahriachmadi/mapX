@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.tekmob.mapx.domain.Akun;
 import com.tekmob.mapx.domain.Maps;
+import com.tekmob.mapx.domain.Penanda;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,16 +63,14 @@ public class MapsDatabaseHandler extends SQLiteOpenHelper {
     }
 
     public Maps findOne(int id){
+        String query="SELECT * FROM "+ TABLE_MAPS + " WHERE "+ KEY_ID + "=" + id ;
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cursor=db.query(TABLE_MAPS, new String[]{KEY_ID,KEY_KOORDINAT_X,KEY_KOORDINAT_Y,KEY_NAMA},
-                KEY_ID+"=?", new String[]{String.valueOf(id)}, null, null, null);
+        Cursor cursor=db.rawQuery(query, null);
 
-        if(cursor!=null){
-            cursor.moveToFirst();
-        }
+        cursor.moveToFirst();
 
-
-        return new Maps(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2), cursor.getString(3));
+        return new Maps(Integer.valueOf(cursor.getString(0)),cursor.getString(1),
+                cursor.getString(2),cursor.getString(3));
     }
 
     public List<Maps> findAll(){

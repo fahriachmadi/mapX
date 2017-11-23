@@ -60,7 +60,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.tekmob.mapx.database.AkunDatabaseHandler;
+import com.tekmob.mapx.database.MapsDatabaseHandler;
+import com.tekmob.mapx.database.PenandaDatabaseHandler;
 import com.tekmob.mapx.domain.Akun;
+import com.tekmob.mapx.domain.Maps;
 
 import org.w3c.dom.Text;
 
@@ -86,6 +89,8 @@ public class MainActivity extends AppCompatActivity
     PopupWindow popup;
     Button clickButton;
     Bundle extras;
+    MapsDatabaseHandler dbMap = new MapsDatabaseHandler(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,21 +127,18 @@ public class MainActivity extends AppCompatActivity
         extras = getIntent().getExtras();
         int value = extras.getInt("id");
 
+
         Akun akun = databaseHandler.findOne(value);
-        Log.d("data ", "ID :"+akun.getId()+" | NAMA :" + akun.getUsername()+" | KATEGORI:"+ akun.getEmail());
         editTextUsername.setText(akun.getUsername());
         editTextEmail.setText(akun.getEmail());
 
-        List<Akun> listAkun=databaseHandler.findAll();
-        for(Akun b:listAkun){
-            Log.d("data", "ID :"+b.getId()+" | USERNAME :"+b.getUsername()+" | EMAIL:"+b.getEmail());
-        }
         android.view.View fragment =  findViewById (R.id.place_autocomplete_fragment);
 
         fragment.setBackgroundColor(Color.WHITE);
 
-    }
 
+
+    }
 
 
 
@@ -237,7 +239,7 @@ public class MainActivity extends AppCompatActivity
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
+    //method for current position
     @Override
     public void onLocationChanged(Location location) {
 
@@ -383,7 +385,17 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        //jika setelah show location
+        if(extras.getInt("id_maps") != NULL){
+            Maps map = dbMap.findOne(extras.getInt("id_maps"));
 
+
+
+            LatLng latLng = new LatLng(Double.parseDouble(map.getKoordinatX()),Double.parseDouble(map.getKoordinatY()));
+        //    System.out.println(latLng.toString());
+            showLocation(latLng);
+            mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(latLng , 17) );
+        }
     }
 // Old Search Without Helper
 // public void onMapSearch(View view) {
@@ -413,8 +425,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onMapLongClick(LatLng latLng) {
+
+
+        showLocation(latLng);
+
+        showPopup(this , latLng );
+    }
+    public void showLocation(LatLng latLng){
         //remove if there are some marker before
-        if (aMaker != null) {
+
+        if (aMaker != null && popup != null) {
             aMaker.remove();
             popup.dismiss();
         }
@@ -425,17 +445,15 @@ public class MainActivity extends AppCompatActivity
 
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 
-        showPopup(this , latLng );
-
-
 
 
     }
+
     //jika udah seacrh maka di retrieve kesini
     @Override
     public void onPlaceSelected(Place place) {
 
-        if (aMaker != null) {
+        if (aMaker != null && popup != null) {
             aMaker.remove();
             popup.dismiss();
         }

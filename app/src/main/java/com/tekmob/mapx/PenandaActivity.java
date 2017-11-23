@@ -30,7 +30,7 @@ public class PenandaActivity extends AppCompatActivity {
     TextView editTextNama;
     TextView editTextKategori;
     Bundle extras;
-
+    Button button ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,14 +95,39 @@ public class PenandaActivity extends AppCompatActivity {
                 tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                         TableRow.LayoutParams.WRAP_CONTENT));
                 if(text.equals("button")){
-                    Button button = new Button(this);
+                    button = new Button(this);
                     button.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                             TableRow.LayoutParams.WRAP_CONTENT));
                     button.setText("Detail");
                     button.setBackgroundColor(Color.WHITE);
                     button.setPadding(10,5,5,5);
+
                     button.setTextColor(Color.BLACK);
+                    button.setId(count);
                     row.addView(button);
+
+                    System.out.println(button.getId());
+
+
+                   button.setOnClickListener( new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            // TODO Auto-generated method stub
+
+                            Intent intent = new Intent(context,PenandaDetail.class);
+
+
+                            intent.putExtra("id_button",button.getId());
+
+                            intent.putExtra("id", extras.getInt("id"));
+
+
+                            startActivity(intent);
+
+                        }
+                    });
+
                     continue;
                 }
                 tv.setGravity(Gravity.CENTER);

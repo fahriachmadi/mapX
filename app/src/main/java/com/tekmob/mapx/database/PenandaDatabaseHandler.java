@@ -76,17 +76,17 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
     }
 
     public Penanda findOne(int id){
+        String query="SELECT * FROM "+ TABLE_PENANDA + " WHERE "+ KEY_ID + "=" + id ;
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cursor=db.query(TABLE_PENANDA, new String[]{KEY_ID,KEY_ID_MAPS,KEY_NAMA,KEY_KETERANGAN,KEY_KATEGORI,KEY_TIMESTAMP},
-                KEY_ID+"=?", new String[]{String.valueOf(id)}, null, null, null);
+        Cursor cursor=db.rawQuery(query, null);
 
-        if(cursor!=null){
-            cursor.moveToFirst();
-        }
+        cursor.moveToFirst();
+
+        return new Penanda(Integer.valueOf(cursor.getString(0)),Integer.valueOf(cursor.getString(1))
+                ,Integer.valueOf(cursor.getString(2)),cursor.getString(3),cursor.getString(4),
+                cursor.getString(5), cursor.getString(6));
 
 
-        return new Penanda(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1)),Integer.parseInt(cursor.getString(2)), cursor.getString(3),
-                cursor.getString(4),cursor.getString(5), cursor.getString(6));
     }
 
     public List<Penanda> findAll(){
