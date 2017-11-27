@@ -32,6 +32,8 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
     private static final String KEY_KETERANGAN = "keterangan";
     private static final String KEY_KATEGORI = "kategori";
     private static final String KEY_TIMESTAMP = "timestamp";
+    private static final String KEY_GAMBAR = "gambar";
+
 
     public PenandaDatabaseHandler(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -47,6 +49,7 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
                 + KEY_KETERANGAN + " TEXT,"
                 + KEY_KATEGORI + " TEXT,"
                 + KEY_TIMESTAMP + " TEXT,"
+                + KEY_GAMBAR + " TEXT,"
                 + "FOREIGN KEY(" + KEY_ID_USER + ")REFERENCES " + TABLE_USER + "(" + KEY_ID     +"),"
                 + "FOREIGN KEY(" + KEY_ID_MAPS + ")REFERENCES " + TABLE_MAPS + "(" + KEY_ID +"))";
         db.execSQL(CREATE_PENANDA_TABLE);
@@ -70,7 +73,7 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
         values.put(KEY_KATEGORI, penanda.getKategori());
 
         values.put(KEY_TIMESTAMP, penanda.getTimestamp());
-
+        values.put(KEY_GAMBAR, penanda.getGambar());
         db.insert(TABLE_PENANDA, null, values);
         db.close();
     }
@@ -84,7 +87,7 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
 
         return new Penanda(Integer.valueOf(cursor.getString(0)),Integer.valueOf(cursor.getString(1))
                 ,Integer.valueOf(cursor.getString(2)),cursor.getString(3),cursor.getString(4),
-                cursor.getString(5), cursor.getString(6));
+                cursor.getString(5), cursor.getString(6), cursor.getString(7));
 
 
     }
@@ -123,6 +126,8 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
         values.put(KEY_KETERANGAN, penanda.getKeterangan());
         values.put(KEY_KATEGORI, penanda.getKategori());
         values.put(KEY_TIMESTAMP, penanda.getTimestamp());
+        values.put(KEY_GAMBAR, penanda.getGambar());
+
 
         db.update(TABLE_PENANDA, values, KEY_ID+"=?", new String[]{String.valueOf(penanda.getId())});
         db.close();
