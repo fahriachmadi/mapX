@@ -88,13 +88,11 @@ public class PenandaDatabaseHandler extends SQLiteOpenHelper{
         return new Penanda(Integer.valueOf(cursor.getString(0)),Integer.valueOf(cursor.getString(1))
                 ,Integer.valueOf(cursor.getString(2)),cursor.getString(3),cursor.getString(4),
                 cursor.getString(5), cursor.getString(6), cursor.getString(7));
-
-
     }
 
     public List<Penanda> findAll(){
         List<Penanda> listPenanda=new ArrayList<Penanda>();
-        String query="SELECT * FROM "+TABLE_PENANDA;
+        String query="SELECT * FROM " + TABLE_PENANDA;
 
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor=db.rawQuery(query, null);

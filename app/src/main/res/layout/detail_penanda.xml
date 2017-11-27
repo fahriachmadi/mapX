@@ -15,24 +15,22 @@
 
         tools:context="me.vable.android.viewandlayoutlessons.WelcomeActivity">
 
-        <ImageButton
-            android:id="@+id/user_profile_photo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="60dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/wallpapercrop"
-            android:elevation="5dp"
-            android:padding="20dp"
-            android:scaleType="centerCrop"
-           />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/gambar"
+                android:scaleType="centerCrop"
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/username_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/user_profile_photo"
+            android:layout_below="@+id/gambar"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="29dp"

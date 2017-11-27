@@ -35,8 +35,6 @@ public class PenandaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.penanda);
-
-
         showPenanda();
     }
     public void showPenanda(){
@@ -106,7 +104,7 @@ public class PenandaActivity extends AppCompatActivity {
                     button.setId(count);
                     row.addView(button);
 
-                    System.out.println(button.getId());
+                    System.out.println("ID Button: " + button.getId());
 
 
                    button.setOnClickListener( new View.OnClickListener() {
