@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import com.tekmob.mapx.domain.Akun;
 import com.tekmob.mapx.domain.Maps;
 import com.tekmob.mapx.domain.Penanda;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +39,7 @@ public class SaveLocation extends AppCompatActivity {
 
     String koorX;
     String koorY;
+    String imageString;
     MapsDatabaseHandler databaseMapsHandler;
     PenandaDatabaseHandler databasePenandaHandler;
 
@@ -85,9 +88,6 @@ public class SaveLocation extends AppCompatActivity {
 
         koorX = str.nextToken(",");
         koorX = koorX.substring(1,koorX.length());
-
-
-
          koorY = str.nextToken("),");
 
 
@@ -155,7 +155,7 @@ public class SaveLocation extends AppCompatActivity {
 
 
                 Penanda penanda = new Penanda(databaseMapsHandler.findlastid(),extras.getInt("id"),editTextNamaTempat.getText().toString(),editTextKeterangan.getText().toString()
-                        ,isiRadio, DateFormat.getDateTimeInstance().format(new Date()));
+                        ,isiRadio, DateFormat.getDateTimeInstance().format(new Date()), imageString);
 //
 //
                databasePenandaHandler.save(penanda);
@@ -201,6 +201,12 @@ public class SaveLocation extends AppCompatActivity {
         if(requestCode == CAM_REQUEST){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imgTakenPic.setImageBitmap(bitmap);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] imageBytes = baos.toByteArray();
+            imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         }
     }
 
