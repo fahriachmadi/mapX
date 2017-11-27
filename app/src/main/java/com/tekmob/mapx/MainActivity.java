@@ -404,17 +404,6 @@ public class MainActivity extends AppCompatActivity
             showLocation(latLng);
             mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(latLng , 17) );
         }
-        else {
-
-            if(
-            checkLocationPermission()) {
-                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                showLocation(latLng);
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
-            }
-        }
     }
 // Old Search Without Helper
 // public void onMapSearch(View view) {
