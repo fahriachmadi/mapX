@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -90,13 +91,15 @@ public class MainActivity extends AppCompatActivity
     Button clickButton;
     Bundle extras;
     MapsDatabaseHandler dbMap = new MapsDatabaseHandler(this);
-
+    protected LocationManager locationManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        locationManager =   (LocationManager) this
+                .getSystemService(LOCATION_SERVICE);
     //get id user
         extras = getIntent().getExtras();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -266,6 +269,8 @@ public class MainActivity extends AppCompatActivity
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
 
+        System.out.println("ASD");
+
 
     }
 
@@ -363,6 +368,9 @@ public class MainActivity extends AppCompatActivity
                     == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient();
                 mMap.setMyLocationEnabled(true);
+                //Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+               // onLocationChanged(location);
+
             }
         }
         else {
@@ -395,6 +403,17 @@ public class MainActivity extends AppCompatActivity
         //    System.out.println(latLng.toString());
             showLocation(latLng);
             mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(latLng , 17) );
+        }
+        else {
+
+            if(
+            checkLocationPermission()) {
+                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                showLocation(latLng);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+            }
         }
     }
 // Old Search Without Helper
