@@ -404,6 +404,23 @@ public class MainActivity extends AppCompatActivity
             showLocation(latLng);
             mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(latLng , 17) );
         }
+
+
+            Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            System.out.println(location);
+            if (location != null) {
+                //Getting longitude and latitude
+
+
+                LatLng latLng = new LatLng(   location.getLatitude(),location.getLongitude());
+                showLocation(latLng);
+                mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(latLng , 17) );
+
+            }
+
+
+
+
     }
 // Old Search Without Helper
 // public void onMapSearch(View view) {
