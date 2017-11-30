@@ -61,7 +61,7 @@ public class Signup extends AppCompatActivity {
                                 newAkun.setEmail("email");
                                 db.save(newAkun);
                                 Toast.makeText(Signup.this,"Signupas", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(context, MainActivity.class);
+                                Intent intent = new Intent(context, Login.class);
                                 startActivity(intent);
                             }
                         }
