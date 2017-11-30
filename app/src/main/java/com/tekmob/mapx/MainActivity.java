@@ -60,17 +60,26 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.DirectionsApi;
+import com.google.maps.GeoApiContext;
+import com.google.maps.android.PolyUtil;
+import com.google.maps.errors.ApiException;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.TravelMode;
 import com.tekmob.mapx.database.AkunDatabaseHandler;
 import com.tekmob.mapx.database.MapsDatabaseHandler;
 import com.tekmob.mapx.database.PenandaDatabaseHandler;
 import com.tekmob.mapx.domain.Akun;
 import com.tekmob.mapx.domain.Maps;
 
+import org.joda.time.DateTime;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.sql.Types;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static java.sql.Types.NULL;
 
@@ -92,6 +101,7 @@ public class MainActivity extends AppCompatActivity
     Bundle extras;
     MapsDatabaseHandler dbMap = new MapsDatabaseHandler(this);
     protected LocationManager locationManager;
+    MarkerOptions markerOptionsCurr ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,7 +149,10 @@ public class MainActivity extends AppCompatActivity
 
         fragment.setBackgroundColor(Color.WHITE);
 
+        checkLocationPermission();
 
+
+        //System.out.println(getGeoContext());
 
     }
 
@@ -246,30 +259,30 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLocationChanged(Location location) {
 
-        mLastLocation = location;
-        if (mCurrLocationMarker != null) {
-            mCurrLocationMarker.remove();
-        }
-
-        //Place cur
-        // rent location marker
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-        mCurrLocationMarker = mMap.addMarker(markerOptions);
-
-        //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
-
-        //stop location updates
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
-
-        System.out.println("ASD");
+//        mLastLocation = location;
+//        if (mCurrLocationMarker != null) {
+//            mCurrLocationMarker.remove();
+//        }
+//
+//        //Place cur
+//        // rent location marker
+//        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+//        MarkerOptions markerOptions = new MarkerOptions();
+//        markerOptions.position(latLng);
+//        markerOptions.title("Current Position");
+//        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+//        mCurrLocationMarker = mMap.addMarker(markerOptions);
+//
+//        //move map camera
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+//
+//        //stop location updates
+//        if (mGoogleApiClient != null) {
+//            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+//        }
+//
+//        System.out.println("ASD");
 
 
     }
@@ -285,32 +298,17 @@ public class MainActivity extends AppCompatActivity
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public boolean checkLocationPermission(){
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Asking user if explanation is needed
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-                //Prompt the user once explanation has been shown
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-
-
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
             } else {
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
+
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                return false;
             }
-            return false;
-        } else {
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
             return true;
         }
     }
@@ -335,6 +333,8 @@ public class MainActivity extends AppCompatActivity
                             buildGoogleApiClient();
                         }
                         mMap.setMyLocationEnabled(true);
+                        Toast.makeText(this, "permission granted", Toast.LENGTH_LONG).show();
+
                     }
 
                 } else {
@@ -393,6 +393,23 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+
+        //show current location
+        if(checkLocationPermission()) {
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+
+            markerOptionsCurr = new MarkerOptions();
+            markerOptionsCurr.position(latLng);
+
+            markerOptionsCurr.title("Current Position");
+            markerOptionsCurr.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+            mCurrLocationMarker = mMap.addMarker(markerOptionsCurr);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+
+        }
         //jika setelah show location
         if(extras.getInt("id_maps") != NULL){
             Maps map = dbMap.findOne(extras.getInt("id_maps"));
@@ -401,22 +418,22 @@ public class MainActivity extends AppCompatActivity
 
             LatLng latLng = new LatLng(Double.parseDouble(map.getKoordinatX()),Double.parseDouble(map.getKoordinatY()));
         //    System.out.println(latLng.toString());
-            showLocation(latLng);
+            MarkerOptions saved_marker_option = new MarkerOptions().position(latLng).title("new");
+
+            saved_marker_option.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+            Marker saved_marker = mMap.addMarker(saved_marker_option);
+
+
+
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
             mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(latLng , 17) );
+            showPopupNavigasi(this, latLng);
+
+
         }
 
-
-            Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            System.out.println(location);
-            if (location != null) {
-                //Getting longitude and latitude
-
-
-                LatLng latLng = new LatLng(   location.getLatitude(),location.getLongitude());
-                showLocation(latLng);
-                mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(latLng , 17) );
-
-            }
 
 
 
@@ -459,9 +476,9 @@ public class MainActivity extends AppCompatActivity
     public void showLocation(LatLng latLng){
         //remove if there are some marker before
 
-        if (aMaker != null && popup != null) {
+        if (aMaker != null ) {
             aMaker.remove();
-            popup.dismiss();
+
         }
 
 
@@ -478,9 +495,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onPlaceSelected(Place place) {
 
-        if (aMaker != null && popup != null) {
+        if (aMaker != null ) {
             aMaker.remove();
-            popup.dismiss();
+
         }
 
 
@@ -500,6 +517,9 @@ public class MainActivity extends AppCompatActivity
 
     // The method that displays the popup save location
     private void showPopup(final Activity context, final LatLng latLng) {
+        if (popup != null) {
+            popup.dismiss();
+        }
         int popupWidth = 440;
         int popupHeight = 140;
 
@@ -544,9 +564,92 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+
+    // The method that displays the popup save location
+    private void showPopupNavigasi(final Activity context, final LatLng latLng) {
+        if (popup != null) {
+            popup.dismiss();
+        }
+        int popupWidth = 450;
+        int popupHeight = 150;
+
+        // Inflate the popup_layout.xml
+        LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.pop_up_navigasi);
+        LayoutInflater layoutInflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.pop_up_button_navigasi, viewGroup);
+
+        // Creating the PopupWindow
+        popup = new PopupWindow(context);
+        popup.setContentView(layout);
+        popup.setWidth(popupWidth);
+        popup.setHeight(popupHeight);
+
+        // Displaying the popup at the specified location, + offsets.
+        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 900, 1600);
+
+        // Clear the default translucent background
+        popup.setBackgroundDrawable(new BitmapDrawable());
+
+
+
+
+        clickButton = (Button)layout.findViewById(R.id.button_for_pop_up);
+
+
+        clickButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+
+                try {
+                    getDirection(markerOptionsCurr.getPosition() ,latLng,TravelMode.WALKING);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ApiException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
+    }
+
     public void logout(MenuItem item) {
         Toast.makeText(this, "Signout", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
+
+    //direction
+    private GeoApiContext getGeoContext() {
+        GeoApiContext geoApiContext = new GeoApiContext();
+        return geoApiContext.setQueryRateLimit(3).setApiKey("AIzaSyDPHgVT_cdIeOAMVc1HIAceOA0gtdkAzJA")
+                .setConnectTimeout(1, TimeUnit.SECONDS)
+                .setReadTimeout(1, TimeUnit.SECONDS)
+                .setWriteTimeout(1, TimeUnit.SECONDS);
+    }
+
+    public void getDirection(LatLng origin,LatLng destination,TravelMode mode) throws InterruptedException, ApiException, IOException {
+        DateTime now = new DateTime();
+
+        DirectionsResult result = DirectionsApi.newRequest(getGeoContext())
+                .mode(mode).origin( new com.google.maps.model.LatLng(origin.latitude,origin
+                .longitude))
+                .destination( new com.google.maps.model.LatLng(destination.latitude,destination
+                        .longitude)).departureTime(now)
+                .await();
+        addPolyline(result,mMap);
+
+    }
+    private void addPolyline(DirectionsResult results, GoogleMap mMap) {
+        List<LatLng> decodedPath = PolyUtil.decode(results.routes[0].overviewPolyline.getEncodedPath());
+        mMap.addPolyline(new PolylineOptions().addAll(decodedPath));
+    }
+
+
 }
