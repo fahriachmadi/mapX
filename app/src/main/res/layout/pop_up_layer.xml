@@ -27,6 +27,15 @@
                 android:textSize="33dp"
                 android:textStyle="bold"/>
 
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/imageView"
+                android:scaleType="centerCrop"
+                android:layout_below="@+id/button"
+                />
+
             <TextView
                 android:id="@+id/text_koordinat"
                 android:layout_width="fill_parent"
@@ -106,25 +115,17 @@
 
             <Button
                 android:id="@+id/button"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_signup"
-                android:text="Take Photo"
-                style="@style/Base.TextAppearance.AppCompat.Body1"
-                android:textColor="#fff"
-                android:textAllCaps="false"
-                android:textSize="18sp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/background_signup"
                 android:clickable="true"
-                android:padding="10dp"/>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView"
-                android:scaleType="centerCrop"
-                android:layout_below="@+id/button"
-                />
+                android:padding="10dp"
+                android:text="Take Photo"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/save_this_location"
@@ -137,7 +138,7 @@
                 android:padding="10dp"
                 android:clickable="true"
                 style="@style/Base.TextAppearance.AppCompat.Body1"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="10dp"
                 android:textSize="18sp"/>
 
             <Button

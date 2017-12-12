@@ -46,7 +46,7 @@ public class PenandaDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("Sudah di detail");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail_penanda);
+        setContentView(R.layout.coba);
 
         editTextNama = (TextView) findViewById(R.id.textview_content_nama);
         editKeterangan = (TextView)findViewById(R.id.textview_content_keterangan);
@@ -64,7 +64,7 @@ public class PenandaDetail extends AppCompatActivity {
 
         final Penanda penanda = dbPenanda.findOne(id_penanda);
 
-    //    System.out.println(penanda.getKategori());
+//    //    System.out.println(penanda.getKategori());
         editKeterangan.setText(penanda.getKeterangan(), TextView.BufferType.EDITABLE);
         editTextNama.setText(penanda.getNama(), TextView.BufferType.EDITABLE);
         jenisTempat.setText(penanda.getKategori(), TextView.BufferType.EDITABLE);

@@ -65,6 +65,7 @@ public class SaveLocation extends AppCompatActivity {
         //for take pict
         btnpic = (Button) findViewById(R.id.button);
         imgTakenPic = (ImageView)findViewById(R.id.imageView);
+        imgTakenPic.setVisibility(View.GONE);
 //        btnpic.setOnClickListener(new btnTakePhotoClicker());
         btnpic.setOnClickListener( new View.OnClickListener() {
 
@@ -200,6 +201,7 @@ public class SaveLocation extends AppCompatActivity {
 
         if(requestCode == CAM_REQUEST){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            imgTakenPic.setVisibility(View.VISIBLE);
             imgTakenPic.setImageBitmap(bitmap);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -214,8 +216,6 @@ public class SaveLocation extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-
             startActivityForResult(intent,CAM_REQUEST);
         }
     }
