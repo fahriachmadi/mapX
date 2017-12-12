@@ -394,22 +394,22 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        //show current location
-        if(checkLocationPermission()) {
-            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-
-            markerOptionsCurr = new MarkerOptions();
-            markerOptionsCurr.position(latLng);
-
-            markerOptionsCurr.title("Current Position");
-            markerOptionsCurr.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-            mCurrLocationMarker = mMap.addMarker(markerOptionsCurr);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
-
-        }
+//        //show current location
+//        if(checkLocationPermission()) {
+//            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//
+//            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+//
+//
+//            markerOptionsCurr = new MarkerOptions();
+//            markerOptionsCurr.position(latLng);
+//
+//            markerOptionsCurr.title("Current Position");
+//            markerOptionsCurr.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+//            mCurrLocationMarker = mMap.addMarker(markerOptionsCurr);
+//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+//
+//        }
         //jika setelah show location
         if(extras.getInt("id_maps") != NULL){
             Maps map = dbMap.findOne(extras.getInt("id_maps"));
