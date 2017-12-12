@@ -352,6 +352,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.setOnMapClickListener(this);
@@ -395,19 +396,25 @@ public class MainActivity extends AppCompatActivity
 
 
 //        //show current location
-//        if(checkLocationPermission()) {
-//            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if(checkLocationPermission()) {
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+
+            markerOptionsCurr = new MarkerOptions();
+            markerOptionsCurr.position(latLng);
+
+            markerOptionsCurr.title("Current Position");
+            markerOptionsCurr.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+            mCurrLocationMarker = mMap.addMarker(markerOptionsCurr);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+
+
+        }
+//        else{
+//            System.out.println("lola");
 //
-//            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-//
-//
-//            markerOptionsCurr = new MarkerOptions();
-//            markerOptionsCurr.position(latLng);
-//
-//            markerOptionsCurr.title("Current Position");
-//            markerOptionsCurr.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-//            mCurrLocationMarker = mMap.addMarker(markerOptionsCurr);
-//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
 //
 //        }
         //jika setelah show location
