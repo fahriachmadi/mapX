@@ -37,7 +37,7 @@ public class PenandaDetail extends AppCompatActivity {
     TextView editKeterangan;
     TextView jenisTempat;
     ImageView gambar;
-    Bundle extras;
+    Bundle extras;  
     Button go_to_location ;
     Button back_to_app ;
     final Context context = this;

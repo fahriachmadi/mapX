@@ -25,7 +25,7 @@ public class ProfileDesign extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.material_design_profile_screen_xml_ui_design);
+        setContentView(R.layout.profil);
 
         db = new AkunDatabaseHandler(this);
         AkunDatabaseHandler databaseHandler=new AkunDatabaseHandler(this);

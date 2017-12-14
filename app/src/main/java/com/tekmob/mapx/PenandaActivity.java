@@ -45,6 +45,7 @@ public class PenandaActivity extends AppCompatActivity {
 
         TableRow tr_head = new TableRow(this);
 
+        tr_head.setBackgroundColor(Color.rgb(189, 195, 199));
         tr_head.setLayoutParams(new TableLayout.LayoutParams(
                         TableLayout.LayoutParams.FILL_PARENT,
                         TableLayout.LayoutParams.WRAP_CONTENT));
@@ -56,7 +57,7 @@ public class PenandaActivity extends AppCompatActivity {
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
             tv.setGravity(Gravity.CENTER);
-            tv.setTextSize(18);
+            tv.setTextSize(16);
             if(!c.equals("No"))
             tv.setWidth(250);
             tv.setTextColor(Color.BLACK);
@@ -83,6 +84,7 @@ public class PenandaActivity extends AppCompatActivity {
             // dara rows
             TableRow row = new TableRow(context);
 
+            row.setBackgroundColor(Color.rgb(236, 240, 241));
             row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
                     TableLayout.LayoutParams.WRAP_CONTENT));
 
@@ -90,6 +92,7 @@ public class PenandaActivity extends AppCompatActivity {
             for(String text:colText) {
 
                 TextView tv = new TextView(this);
+                tv.setTextSize(12);
                 tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                         TableRow.LayoutParams.WRAP_CONTENT));
                 if(text.equals("button")){
@@ -97,9 +100,9 @@ public class PenandaActivity extends AppCompatActivity {
                     button.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                             TableRow.LayoutParams.WRAP_CONTENT));
                     button.setText("Detail");
-                    button.setBackgroundColor(Color.WHITE);
-                    button.setPadding(10,5,5,5);
+                    button.setBackgroundColor(Color.TRANSPARENT);
 
+                    button.setPadding(10,5,5,5);
                     button.setTextColor(Color.BLACK);
                     button.setId(count);
                     row.addView(button);
