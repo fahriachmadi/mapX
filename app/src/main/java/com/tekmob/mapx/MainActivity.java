@@ -352,6 +352,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.setOnMapClickListener(this);
@@ -394,7 +395,7 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        //show current location
+//        //show current location
         if(checkLocationPermission()) {
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
@@ -409,7 +410,13 @@ public class MainActivity extends AppCompatActivity
             mCurrLocationMarker = mMap.addMarker(markerOptionsCurr);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
 
+
         }
+//        else{
+//            System.out.println("lola");
+//
+//
+//        }
         //jika setelah show location
         if(extras.getInt("id_maps") != NULL){
             Maps map = dbMap.findOne(extras.getInt("id_maps"));
