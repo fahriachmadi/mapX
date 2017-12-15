@@ -259,29 +259,29 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLocationChanged(Location location) {
 
-//        mLastLocation = location;
-//        if (mCurrLocationMarker != null) {
-//            mCurrLocationMarker.remove();
-//        }
-//
-//        //Place cur
-//        // rent location marker
-//        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-//        MarkerOptions markerOptions = new MarkerOptions();
-//        markerOptions.position(latLng);
-//        markerOptions.title("Current Position");
-//        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-//        mCurrLocationMarker = mMap.addMarker(markerOptions);
-//
-//        //move map camera
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-//        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
-//
-//        //stop location updates
-//        if (mGoogleApiClient != null) {
-//            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-//        }
-//
+        mLastLocation = location;
+        if (mCurrLocationMarker != null) {
+            mCurrLocationMarker.remove();
+        }
+
+        //Place cur
+        // rent location marker
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title("Current Position");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        mCurrLocationMarker = mMap.addMarker(markerOptions);
+
+        //move map camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+
+        //stop location updates
+        if (mGoogleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        }
+
 //        System.out.println("ASD");
 
 
@@ -395,24 +395,24 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-//        //show current location
-        if(checkLocationPermission()) {
-            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-
-            markerOptionsCurr = new MarkerOptions();
-            markerOptionsCurr.position(latLng);
-
-            markerOptionsCurr.title("Current Position");
-            markerOptionsCurr.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-            mCurrLocationMarker = mMap.addMarker(markerOptionsCurr);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
-
-
-        }
-//        else{
+////        //show current location
+//        if(checkLocationPermission()) {
+//            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//
+//            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+//
+//
+//            markerOptionsCurr = new MarkerOptions();
+//            markerOptionsCurr.position(latLng);
+//
+//            markerOptionsCurr.title("Current Position");
+//            markerOptionsCurr.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+//            mCurrLocationMarker = mMap.addMarker(markerOptionsCurr);
+//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+//
+//
+//        }
+////        else{
 //            System.out.println("lola");
 //
 //
