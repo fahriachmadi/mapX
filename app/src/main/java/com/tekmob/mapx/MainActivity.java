@@ -267,11 +267,11 @@ public class MainActivity extends AppCompatActivity
         //Place cur
         // rent location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-        mCurrLocationMarker = mMap.addMarker(markerOptions);
+        markerOptionsCurr = new MarkerOptions();
+        markerOptionsCurr.position(latLng);
+        markerOptionsCurr.title("Current Position");
+        markerOptionsCurr.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        mCurrLocationMarker = mMap.addMarker(markerOptionsCurr);
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
