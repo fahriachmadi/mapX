@@ -528,7 +528,7 @@ public class MainActivity extends AppCompatActivity
             popup.dismiss();
         }
         int popupWidth = 440;
-        int popupHeight = 140;
+        int popupHeight = 161;
 
         // Inflate the popup_layout.xml
         LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.pop_up);
