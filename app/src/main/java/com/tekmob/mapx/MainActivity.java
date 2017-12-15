@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity
     Button clickButton;
     Bundle extras;
     MapsDatabaseHandler dbMap = new MapsDatabaseHandler(this);
+    boolean isBukanRetrieveLokasi = true;
     protected LocationManager locationManager;
     MarkerOptions markerOptionsCurr ;
     @Override
@@ -274,9 +275,10 @@ public class MainActivity extends AppCompatActivity
         mCurrLocationMarker = mMap.addMarker(markerOptionsCurr);
 
         //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
-
+        if(isBukanRetrieveLokasi){
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+        }
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
@@ -437,7 +439,7 @@ public class MainActivity extends AppCompatActivity
 
             mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(latLng , 17) );
             showPopupNavigasi(this, latLng);
-
+            isBukanRetrieveLokasi =false;
 
         }
 
@@ -539,8 +541,6 @@ public class MainActivity extends AppCompatActivity
         // Creating the PopupWindow
           popup = new PopupWindow(context);
         popup.setContentView(layout);
-        popup.setWidth(popupWidth);
-        popup.setHeight(popupHeight);
 
         // Displaying the popup at the specified location, + offsets.
         popup.showAtLocation(layout, Gravity.NO_GRAVITY, 900, 1800);
@@ -589,8 +589,6 @@ public class MainActivity extends AppCompatActivity
         // Creating the PopupWindow
         popup = new PopupWindow(context);
         popup.setContentView(layout);
-        popup.setWidth(popupWidth);
-        popup.setHeight(popupHeight);
 
         // Displaying the popup at the specified location, + offsets.
         popup.showAtLocation(layout, Gravity.NO_GRAVITY, 900, 1600);
